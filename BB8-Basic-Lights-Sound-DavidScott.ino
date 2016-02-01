@@ -75,12 +75,12 @@ MP3FLASH16P myPlayer;
 
 //Arduino Pin Assignments - Change to suit your needs
 #define PIN_voice_LED     6  
-#define PIN_pulse_LED     5  
-#define PIN_sound         A2 
+#define PIN_pulse_LED     9  
+#define PIN_sound         2 
 #define PIN_trigger       A3
 #define PIN_sound_BUSY    3
 #define number_of_sounds  5
-//Default Pin Assignments based off of the BASIC WIRING in NOTES
+//Default Pin Assignments based off of the BASIC WIRING in NOTES - Original Pins below
 //PIN_voice_LED     6  //Voice LED - 5mm White & 220 Ohm Resistor
 //PIN_pulse_LED     5  //Logic LED - 3mm White & 220 Ohm Resistor
 //PIN_sound         A2 //Speaker lead for sound & LED sync
