@@ -7,6 +7,8 @@
     //Versions History
     //0.01 - Original Sketch by DavidScott
     //0.02 - r0n_dL added annotations & variable for PIN_sound_BUSY as suggested by DavidScott
+	  //0.03 - r0n_dL reassigned pins to align with Padawan control system
+		   - Changed SoftwareSerial pins (RX/TX) 10/9 to 8/4
 
     //r0n_dL IMPORTANT NOTE & RECOGNITON: This sketch was written by DavidScott. Only thing I did was added 
       more annotations
@@ -46,7 +48,8 @@
     *There are actually MORE LEDs required if using BB-8 Club spec (as of 4 Jan 16 T&M beta v033) pg 42
      If using additional LEDs, more resistors and/or different value resistors will be required.
 
-     May want to consider adding a LED to the HP as well which will also require changes to the resistor & wiring
+     May want to consider adding a LED to the HP as well which will also require changes to the resistor 
+     & wiring
 
     Example:  2 Front (Top & Bottom) Logic Lenses have 5 round 3mm LEDs each
               1 Side Logic Lens has 4 round 3mm LEDs
@@ -54,12 +57,12 @@
     // r0n_dL BASIC WIRING
 
  Switch  |  5v Power |  Pro Micro  |  MP3-FLASH-16P  |  Speaker  |  LEDs
-         |           |  10  (1K R) |      TX         |           |     
-         |           |   9  (1K R) |      RX         |           |     
+         |           |   8  (1K R) |      TX         |           |     
+         |           |   4  (1K R) |      RX         |           |     
          |           |   6         |                 |           |   + (5mm Wht 220 R)
-         |           |   5         |                 |           |   + (3mm Wht 220 R)
+         |           |   9         |                 |           |   + (3mm Wht 220 R)
          |           |   3         |     BUSY        |           |     
-         |           |   A2        |     SPK1        |     +     |      
+         |           |   7         |     SPK1        |     +     |      
          |           |             |     SPK2        |     -     |     
          |   POS     |   VCC       |     VCC         |           |   + (3mm Red)- +(3mm Blue) 56 R
     1    |   NEG     |   GND       |     GND         |           |   GND all LEDs
@@ -83,12 +86,26 @@
 	WTV1BSY A0
 	WTV1CLK A1
 	WTV1DAT A2
-	
+
+RESERVED
+	8 (Analog) - RX (SoftwareSerial)
+	4 TX (SoftwareSerial)
 FREE
 	TX0
 	2 (Analog)
 	4 (Analog)
-	8 (Analog) - RESERVED DO NOT USE
+
+	
+ SoftwareSerial Limitations:
+ The library has the following known limitations:
+	If using multiple software serial ports, only one can receive data at a time.
+	
+	Not all pins on the Mega and Mega 2560 support change interrupts, so only the following can be used for 
+	RX: 10, 11, 12, 13, 14, 15, 50, 51, 52, 53, A8 (62), A9 (63), A10 (64), A11 (65), A12 (66), A13 (67), 
+	A14 (68), A15 (69).
+
+	Not all pins on the Leonardo and Micro support change interrupts, so only the following can be used for
+	RX: 8, 9, 10, 11, 14 (MISO), 15 (SCK), 16 (MOSI).
 */
 
 #include "SoftwareSerial.h"
