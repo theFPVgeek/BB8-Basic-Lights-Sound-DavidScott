@@ -161,4 +161,5 @@ void loop() {
     // Slow pulsing light on the side of BB-8's head
     pulseBrightness = 170+(sin(millis()/400.00)*80);
     analogWrite(PIN_pulse_LED, pulseBrightness);
+
 }
