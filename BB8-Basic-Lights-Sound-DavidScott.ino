@@ -67,6 +67,28 @@
     
  NOTE: 3mm Red LED and 3mm Blue LED wired in series with 56 ohm Resistor
  
+ Future Pins:
+ 
+ PS2 Controller
+	PS2ATT  10
+	PS2CMD  16
+	PS2DAT  14
+	Ps2CLK  15
+ 
+ For Body Signal
+	BODYSIG RX1
+	
+ For WTV020SD-16P
+	WTV1BSY A0
+	WTV1CLK A1
+	WTV1DAT A2
+	
+FREE
+	TX0
+	2 (Analog)
+	4 (Analog)
+	8 (Analog) - RESERVED DO NOT USE
+	9 (Digital)
 */
 
 #include "SoftwareSerial.h"
@@ -75,8 +97,8 @@ MP3FLASH16P myPlayer;
 
 //Arduino Pin Assignments - Change to suit your needs
 #define PIN_voice_LED     6  
-#define PIN_pulse_LED     9  
-#define PIN_sound         2 
+#define PIN_pulse_LED     5  
+#define PIN_sound         7 
 #define PIN_trigger       A3
 #define PIN_sound_BUSY    3
 #define number_of_sounds  5
