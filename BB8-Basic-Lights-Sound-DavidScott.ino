@@ -76,7 +76,8 @@
 	Ps2CLK  15
  
  For Body Signal
-	BODYSIG RX1
+	BODYRX RX1
+	BODYTX 5
 	
  For WTV020SD-16P
 	WTV1BSY A0
@@ -88,7 +89,6 @@ FREE
 	2 (Analog)
 	4 (Analog)
 	8 (Analog) - RESERVED DO NOT USE
-	9 (Digital)
 */
 
 #include "SoftwareSerial.h"
@@ -97,7 +97,7 @@ MP3FLASH16P myPlayer;
 
 //Arduino Pin Assignments - Change to suit your needs
 #define PIN_voice_LED     6  
-#define PIN_pulse_LED     5  
+#define PIN_pulse_LED     9  
 #define PIN_sound         7 
 #define PIN_trigger       A3
 #define PIN_sound_BUSY    3
