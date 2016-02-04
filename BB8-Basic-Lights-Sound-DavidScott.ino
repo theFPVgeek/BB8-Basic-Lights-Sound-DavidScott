@@ -1,38 +1,39 @@
 /*
-    //===================================================================================================
-    //==================  BB-8 Basic Lights and Sound using Arduino & MP3-FLASH-16P =====================
-    //=========================================  v0.04  =================================================
-    //===================================================================================================
+    ===================================================================================================
+    ==================  BB-8 Basic Lights and Sound using Arduino & MP3-FLASH-16P =====================
+    =========================================  v0.04  =================================================
+    ===================================================================================================
 
-    //Versions History
-    //0.01 - Original Sketch by DavidScott
-    //0.02 - r0n_dL added annotations & variable for PIN_sound_BUSY as suggested by DavidScott
-	  //0.03 - r0n_dL reassigned pins to align with Padawan control system
-		       - Changed SoftwareSerial pins (RX/TX) 10/9 to 8/4
-    //0.04 - Change pinMode for PIN_trigger to INPUT_PULLUP to resolve issue using with Pro Micro
+    Versions History
+    0.01 - Original Sketch by DavidScott
+    0.02 - r0n_dL added annotations & variable for PIN_sound_BUSY as suggested by DavidScott
+	  0.03 - r0n_dL reassigned pins to align with Padawan control system
+	       - Changed SoftwareSerial pins (RX/TX) 10/9 to 8/4
+    0.04 - Change pinMode for PIN_trigger to INPUT_PULLUP to resolve issue using with Pro Micro
 
-    //r0n_dL IMPORTANT NOTE & RECOGNITON: This sketch was written by DavidScott. Only thing I did was added 
+    r0n_dL IMPORTANT NOTE & RECOGNITON: This sketch was written by DavidScott. Only thing I did was added 
       more annotations
 
-    //DavidScott's original comment below
-    This example plays a random file (001 to 010) forever
-    It uses the playFileAndWait() command so no extra code is needed, it will play another file as soon as 
-    the previous one finishes. If it doesn't work, try reversing the RX/TX wires as that's probably going to be
-    the most common mistake. Also check that the player's BUSY line is connected to Arduino pin 3
-    Finally check that the player has a speaker connected as well as ground and VCC
+    // DavidScott's original comment below
+    
+    // This example plays a random file (001 to 010) forever
+    // It uses the playFileAndWait() command so no extra code is needed, it will play another file as soon as 
+    // the previous one finishes. If it doesn't work, try reversing the RX/TX wires as that's probably going to be
+    // the most common mistake. Also check that the player's BUSY line is connected to Arduino pin 3
+    // Finally check that the player has a speaker connected as well as ground and VCC
 
-    // r0n_dL NOTES:  Basic sketch provided by DavidScott to give sounds and synchronized voice lights for 
+    r0n_dL NOTES:  Basic sketch provided by DavidScott to give sounds and synchronized voice lights for 
                       scale BB-8 Domes
 
-    // REQUIRED: MP3FLASH16P Library.  Library is located at
-    // https://github.com/Critters/MP3FLASH16P
-    // (that's an Arduino Library - it needs to be downloaded and extracted into your
-    // Libraries folder for this sketch to work)
+    REQUIRED: MP3FLASH16P Library.  Library is located at
+    https://github.com/Critters/MP3FLASH16P
+    (^ That's an Arduino Library - it needs to be downloaded and extracted into your Libraries folder
+    for this sketch to work)
     
-    // IMPORTANT: By default MP3FLASH16P library assumes using Software Serial (RX/TX) ports 10/11.
+    IMPORTANT: By default MP3FLASH16P library assumes using Software Serial (RX/TX) ports 10/11.
                   Change this pin assignments if using different pins in the .cpp file.  I'm using 8/4.
 
-    // r0n_dL PARTS USED
+    r0n_dL PARTS USED
     
     1 Arduino Pro Micro
     1 MP3-FLASH-16P MP3 Soundboard
@@ -55,7 +56,7 @@
     Example:  2 Front (Top & Bottom) Logic Lenses have 5 round 3mm LEDs each
               1 Side Logic Lens has 4 round 3mm LEDs
 
-    // r0n_dL BASIC WIRING
+    r0n_dL BASIC WIRING for testing
 
  Switch | 5v Power | Pro Micro | MP3-FLASH-16P | Speaker | LEDs
         |   POS    |  VCC      |     VCC       |         | + (3mm Red)- +(3mm Blue) 56 R
@@ -72,15 +73,16 @@
  NOTE: 3mm Red LED and 3mm Blue LED wired in series with 56 ohm Resistor
  * MP3 TX to Pin 8 not required.  Do not use pin 8 for anything else
  
- Future Pins:
+
+FUTURE PINS:
  
- PS2 Controller
+PS2 Controller
 	PS2ATT  10
 	PS2CMD  16
 	PS2DAT  14
 	Ps2CLK  15
  
- For Body Signal
+For Body Signal
 	BODYRX RX1
 
 RESERVED
@@ -129,11 +131,12 @@ MP3FLASH16P myPlayer;
 
 void setup() 
 {
-    myPlayer.init(PIN_sound_BUSY); // Init the player with the MP3 BUSY pin connected to Arduino pin defined
+    myPlayer.init(PIN_sound_BUSY);      // Init the player with the MP3 BUSY pin connected to Arduino pin defined
     pinMode(PIN_voice_LED, OUTPUT);
     pinMode(PIN_pulse_LED, OUTPUT); 
     pinMode(PIN_sound, INPUT);
-    pinMode(PIN_trigger, INPUT_PULLUP);
+    pinMode(PIN_trigger, INPUT_PULLUP); // Changed INPUT to INPUT_PULLUP because of issues working with Pro Micro.  
+										                    // Change back to INPUT if required
     randomSeed(analogRead(0));
     Serial.begin(9600);
 }
