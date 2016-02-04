@@ -82,19 +82,19 @@
  
  For Body Signal
 	BODYRX RX1
-	
- For WTV020SD-16P
-	WTV1BSY A0
-	WTV1CLK A1
-	WTV1DAT A2
 
 RESERVED
 	8 (Analog) - RX (SoftwareSerial)
 	4 TX (SoftwareSerial)
+ 
 FREE
 	TX0
-	2 (Analog)
 	5 (Digital)
+  7 
+  Possibly For WTV020SD-16P
+  WTV1BSY A0
+  WTV1CLK A1
+  WTV1DAT 2
 
 	
  SoftwareSerial Limitations:
