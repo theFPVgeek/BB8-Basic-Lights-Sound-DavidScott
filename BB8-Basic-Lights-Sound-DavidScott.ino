@@ -1,7 +1,7 @@
 /*
     //===================================================================================================
     //==================  BB-8 Basic Lights and Sound using Arduino & MP3-FLASH-16P =====================
-    //=========================================  v0.02  =================================================
+    //=========================================  v0.04  =================================================
     //===================================================================================================
 
     //Versions History
@@ -9,6 +9,7 @@
     //0.02 - r0n_dL added annotations & variable for PIN_sound_BUSY as suggested by DavidScott
 	  //0.03 - r0n_dL reassigned pins to align with Padawan control system
 		   - Changed SoftwareSerial pins (RX/TX) 10/9 to 8/4
+    //0.04 - Change pinMode for PIN_trigger to INPUT_PULLUP to resolve issue using with Pro Micro
 
     //r0n_dL IMPORTANT NOTE & RECOGNITON: This sketch was written by DavidScott. Only thing I did was added 
       more annotations
@@ -29,11 +30,11 @@
     // Libraries folder for this sketch to work)
     
     // IMPORTANT: By default MP3FLASH16P library assumes using Software Serial (RX/TX) ports 10/11.
-                  Change this pin assignments if using different pins in the .cpp file.  I'm using 10/9.
+                  Change this pin assignments if using different pins in the .cpp file.  I'm using 8/4.
 
     // r0n_dL PARTS USED
     
-    1 SparkFun Arduino Pro Micro
+    1 Arduino Pro Micro
     1 MP3-FLASH-16P MP3 Soundboard
     1 Red 3mm Flanged LED (Radar Eye)*
     1 Blue 3mm Flanged LED (Side Logic Display)*
@@ -56,19 +57,20 @@
 
     // r0n_dL BASIC WIRING
 
- Switch  |  5v Power |  Pro Micro  |  MP3-FLASH-16P  |  Speaker  |  LEDs
-         |           |   8  (1K R) |      TX         |           |     
-         |           |   4  (1K R) |      RX         |           |     
-         |           |   6         |                 |           |   + (5mm Wht 220 R)
-         |           |   9         |                 |           |   + (3mm Wht 220 R)
-         |           |   3         |     BUSY        |           |     
-         |           |   7         |     SPK1        |     +     |      
-         |           |             |     SPK2        |     -     |     
-         |   POS     |   VCC       |     VCC         |           |   + (3mm Red)- +(3mm Blue) 56 R
-    1    |   NEG     |   GND       |     GND         |           |   GND all LEDs
-    2    |           |   A3        |                 |           |
+ Switch | 5v Power | Pro Micro | MP3-FLASH-16P | Speaker | LEDs
+        |          |  8*(1K R) |      TX       |         |     
+        |          |  4 (1K R) |      RX       |         |     
+        |          |  6        |               |         | + (5mm Wht 220 R)
+        |          |  9        |               |         | + (3mm Wht 220 R)
+        |          |  3        |     BUSY      |         |     
+        |          |  7        |     SPK1      |   +     |      
+        |          |           |     SPK2      |   -     |     
+        |   POS    |  VCC      |     VCC       |         | + (3mm Red)- +(3mm Blue) 56 R
+    1   |   NEG    |  GND      |     GND       |         | GND all LEDs
+    2   |          |  A3       |               |         |
     
  NOTE: 3mm Red LED and 3mm Blue LED wired in series with 56 ohm Resistor
+ * MP3 TX to Pin 8 not required.  Do not use pin 8 for anything else
  
  Future Pins:
  
@@ -80,7 +82,6 @@
  
  For Body Signal
 	BODYRX RX1
-	BODYTX 5
 	
  For WTV020SD-16P
 	WTV1BSY A0
@@ -93,7 +94,7 @@ RESERVED
 FREE
 	TX0
 	2 (Analog)
-	4 (Analog)
+	5 (Digital)
 
 	
  SoftwareSerial Limitations:
@@ -132,7 +133,7 @@ void setup()
     pinMode(PIN_voice_LED, OUTPUT);
     pinMode(PIN_pulse_LED, OUTPUT); 
     pinMode(PIN_sound, INPUT);
-    pinMode(PIN_trigger, INPUT);
+    pinMode(PIN_trigger, INPUT_PULLUP);
     randomSeed(analogRead(0));
     Serial.begin(9600);
 }
