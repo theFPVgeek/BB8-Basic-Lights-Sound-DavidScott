@@ -10,6 +10,7 @@
 	  0.03 - r0n_dL reassigned pins to align with Padawan control system
 	       - Changed SoftwareSerial pins (RX/TX) 10/9 to 8/4
     0.04 - Change pinMode for PIN_trigger to INPUT_PULLUP to resolve issue using with Pro Micro
+    0.05 - Added support for the BY8301-16P and BY8001-16P sound modules
 
     r0n_dL IMPORTANT NOTE & RECOGNITON: This sketch was written by DavidScott. Only thing I did was added 
       more annotations
@@ -25,12 +26,16 @@
     r0n_dL NOTES:  Basic sketch provided by DavidScott to give sounds and synchronized voice lights for 
                       scale BB-8 Domes
 
-    REQUIRED: MP3FLASH16P Library.  Library is located at
-    https://github.com/Critters/MP3FLASH16P
-    (^ That's an Arduino Library - it needs to be downloaded and extracted into your Libraries folder
-    for this sketch to work)
+    REQUIRED Libaries to make this sketch work:
     
-    IMPORTANT: By default MP3FLASH16P library assumes using Software Serial (RX/TX) ports 10/11.
+    MP3FLASH16P Library  
+    https://github.com/Critters/MP3FLASH16P
+    
+    BY8x0116P Library
+    https://github.com/r0ndL/BY8x01
+
+    
+    IMPORTANT: By default MP3FLASH16P &  BY8x0116P library assumes using Software Serial (RX/TX) ports 10/11.
                   Change this pin assignments if using different pins in the .cpp file.  I'm using 8/4.
 
     r0n_dL PARTS USED
