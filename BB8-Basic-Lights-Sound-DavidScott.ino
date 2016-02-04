@@ -62,7 +62,7 @@
         |   POS    |  VCC      |     VCC       |         | + (3mm Red)- +(3mm Blue) 56 R
     1   |   NEG    |  GND      |     GND       |         | GND all LEDs
         |          |  3        |     BUSY      |         |    
-        |          |  5        |               |         | + (3mm Wht 220 R)   
+        |          |  9        |               |         | + (3mm Wht 220 R)   
         |          |  8*(1K R) |      TX       |         |     
         |          |  4 (1K R) |      RX       |         |     
         |          |  6        |               |         | + (5mm Wht 220 R) 
@@ -150,7 +150,7 @@ FREE
 //     PIN_sound_BUSY    3  //Connect to BUSY on MP3-FLASH-16P
 
 #define PIN_sound_BUSY    3
-#define PIN_pulse_LED     5  
+#define PIN_pulse_LED     9  
 #define PIN_voice_LED     6  
 #define PIN_sound         A2
 #define PIN_trigger       A3
