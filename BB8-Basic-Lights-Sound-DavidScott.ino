@@ -113,24 +113,31 @@ FREE
 
 // SET AUDIO OPTIONS...
 
-// Note: This sketch currently supports 3 different sound modules (MP3-FLASH-16P, BY8001-16P, BY8301-16P)
-
+// NOTE: 	This sketch currently supports 3 different sound modules (MP3-FLASH-16P, BY8001-16P, BY8301-16P)
+//			  BUT I'm having issues with the libraries conflicting with each other if I use the option to
+//			  define the audio and use if/else statements.  SOOOO until I get the library issue resolved just
+//			  comment out the library not required and the next proceeding line. 
+  
 //#define AUDIO1  1 // 1=MP3-FLASH-16P
-                  // 2=BY8001-16P or BY8301-16P
+                    // 2=BY8001-16P or BY8301-16P
 
-				  
+                            
 // INCLUDE LIBS AND DECLARE VARIABLES...
 
 #include "SoftwareSerial.h"
 
 //#if (AUDIO1==2)
   //settings for BY8001-16P or BY8301-16P module...
+  
   //#include <BY8x0116P.h>
   //BY8x0116P myPlayer;
+  
 //#else 
   //settings for MP3-FLASH-16P...
+  
   #include "MP3FLASH16P.h"
   MP3FLASH16P myPlayer;
+  
 //#endif
 
 
