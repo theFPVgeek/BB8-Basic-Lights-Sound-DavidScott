@@ -8,7 +8,7 @@
     //0.01 - Original Sketch by DavidScott
     //0.02 - r0n_dL added annotations & variable for PIN_sound_BUSY as suggested by DavidScott
 	  //0.03 - r0n_dL reassigned pins to align with Padawan control system
-		   - Changed SoftwareSerial pins (RX/TX) 10/9 to 8/4
+		       - Changed SoftwareSerial pins (RX/TX) 10/9 to 8/4
     //0.04 - Change pinMode for PIN_trigger to INPUT_PULLUP to resolve issue using with Pro Micro
 
     //r0n_dL IMPORTANT NOTE & RECOGNITON: This sketch was written by DavidScott. Only thing I did was added 
@@ -58,15 +58,16 @@
     // r0n_dL BASIC WIRING
 
  Switch | 5v Power | Pro Micro | MP3-FLASH-16P | Speaker | LEDs
-        |          |  8*(1K R) |      TX       |         |     
-        |          |  4 (1K R) |      RX       |         |     
-        |          |  6        |               |         | + (5mm Wht 220 R)
-        |          |  9        |               |         | + (3mm Wht 220 R)
-        |          |  3        |     BUSY      |         |     
-        |          |  7        |     SPK1      |   +     |      
-        |          |           |     SPK2      |   -     |     
         |   POS    |  VCC      |     VCC       |         | + (3mm Red)- +(3mm Blue) 56 R
     1   |   NEG    |  GND      |     GND       |         | GND all LEDs
+        |          |  3        |     BUSY      |         |    
+        |          |  5        |               |         | + (3mm Wht 220 R)   
+        |          |  8*(1K R) |      TX       |         |     
+        |          |  4 (1K R) |      RX       |         |     
+        |          |  6        |               |         | + (5mm Wht 220 R) 
+        |          |  7        |     SPK1      |   +     |      
+        |          |           |     SPK2      |   -     |     
+
     2   |          |  A3       |               |         |
     
  NOTE: 3mm Red LED and 3mm Blue LED wired in series with 56 ohm Resistor
@@ -114,11 +115,11 @@ FREE
 MP3FLASH16P myPlayer;
 
 //Arduino Pin Assignments - Change to suit your needs
-#define PIN_voice_LED     6  
-#define PIN_pulse_LED     9  
-#define PIN_sound         7 
-#define PIN_trigger       A3
 #define PIN_sound_BUSY    3
+#define PIN_pulse_LED     5  
+#define PIN_voice_LED     6  
+#define PIN_sound         A2
+#define PIN_trigger       A3
 #define number_of_sounds  5
 //Default Pin Assignments based off of the BASIC WIRING in NOTES - Original Pins below
 //PIN_voice_LED     6  //Voice LED - 5mm White & 220 Ohm Resistor
