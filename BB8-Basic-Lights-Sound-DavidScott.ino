@@ -65,9 +65,8 @@
         |          |  8*(1K R) |      TX       |         |     
         |          |  4 (1K R) |      RX       |         |     
         |          |  6        |               |         | + (5mm Wht 220 R) 
-        |          |  7        |     SPK1      |   +     |      
+        |          |  A2       |     SPK1      |   +     |      
         |          |           |     SPK2      |   -     |     
-
     2   |          |  A3       |               |         |
     
  NOTE: 3mm Red LED and 3mm Blue LED wired in series with 56 ohm Resistor
