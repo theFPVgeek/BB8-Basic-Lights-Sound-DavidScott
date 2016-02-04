@@ -111,23 +111,51 @@ FREE
 	RX: 8, 9, 10, 11, 14 (MISO), 15 (SCK), 16 (MOSI).
 */
 
-#include "SoftwareSerial.h"
-#include "MP3FLASH16P.h"
-MP3FLASH16P myPlayer;
+// SET AUDIO OPTIONS...
 
-//Arduino Pin Assignments - Change to suit your needs
+// Note: This sketch currently supports 3 different sound modules (MP3-FLASH-16P, BY8001-16P, BY8301-16P)
+
+#define AUDIO1  1 // 1=MP3-FLASH-16P
+                  // 2=BY8001-16P or BY8301-16P
+
+				  
+// INCLUDE LIBS AND DECLARE VARIABLES...
+
+#include "SoftwareSerial.h"
+
+#if (AUDIO1==2)
+  //settings for BY8001-16P or BY8301-16P module...
+  #include <BYx01.h>
+  BYx01 myPlayer;
+#else 
+  //settings for MP3-FLASH-16P...
+  #include "MP3FLASH16P.h"
+  MP3FLASH16P myPlayer;
+#endif
+
+
+// ARDUINO PIN ASSIGNMENTS...
+// Default Pin Assignments based off of the BASIC WIRING in NOTES - Original Pins below
+//     PIN_voice_LED     6  //Voice LED - 5mm White & 220 Ohm Resistor
+//     PIN_pulse_LED     5  //Logic LED - 3mm White & 220 Ohm Resistor
+//     PIN_sound         A2 //Speaker lead for sound & LED sync
+//     PIN_trigger       A3 //Connect to Switch
+//     PIN_sound_BUSY    3  //Connect to BUSY on MP3-FLASH-16P
+
 #define PIN_sound_BUSY    3
 #define PIN_pulse_LED     5  
 #define PIN_voice_LED     6  
 #define PIN_sound         A2
 #define PIN_trigger       A3
+
+
+// ADDITIONAL SOUND OPTIONS...
+
 #define number_of_sounds  5
-//Default Pin Assignments based off of the BASIC WIRING in NOTES - Original Pins below
-//PIN_voice_LED     6  //Voice LED - 5mm White & 220 Ohm Resistor
-//PIN_pulse_LED     5  //Logic LED - 3mm White & 220 Ohm Resistor
-//PIN_sound         A2 //Speaker lead for sound & LED sync
-//PIN_trigger       A3 //Connect to Switch
-//PIN_sound_BUSY    3  //Connect to BUSY on MP3-FLASH-16P
+
+//
+//
+//
 
 void setup() 
 {
