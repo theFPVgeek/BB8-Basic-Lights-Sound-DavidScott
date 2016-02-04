@@ -115,7 +115,7 @@ FREE
 
 // Note: This sketch currently supports 3 different sound modules (MP3-FLASH-16P, BY8001-16P, BY8301-16P)
 
-#define AUDIO1  1 // 1=MP3-FLASH-16P
+//#define AUDIO1  1 // 1=MP3-FLASH-16P
                   // 2=BY8001-16P or BY8301-16P
 
 				  
@@ -123,15 +123,15 @@ FREE
 
 #include "SoftwareSerial.h"
 
-#if (AUDIO1==2)
+//#if (AUDIO1==2)
   //settings for BY8001-16P or BY8301-16P module...
-  #include <BYx01.h>
-  BYx01 myPlayer;
-#else 
+  //#include <BY8x0116P.h>
+  //BY8x0116P myPlayer;
+//#else 
   //settings for MP3-FLASH-16P...
   #include "MP3FLASH16P.h"
   MP3FLASH16P myPlayer;
-#endif
+//#endif
 
 
 // ARDUINO PIN ASSIGNMENTS...
