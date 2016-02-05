@@ -1,6 +1,6 @@
 /*
     ===================================================================================================
-    ================================ BB-8 Basic Sound & Lights DOME ===================================
+    ==================================== BB-8 PADAWAN DOME ============================================
     ======================================  Version 0.06  =============================================
     ===================================================================================================
 
@@ -121,9 +121,6 @@ FREE
 // SET AUDIO OPTIONS...
 
 // NOTE:  This sketch currently supports 3 different sound modules (MP3-FLASH-16P, BY8001-16P, BY8301-16P)
-//        BUT I'm having issues with the libraries conflicting with each other if I use the option to
-//        define the audio and use if/else statements.  SOOOO until I get the library issue resolved just
-//        comment out the library not required and the next proceeding line. 
   
 #define AUDIO1  1   // 1=MP3-FLASH-16P
                     // 2=BY8001-16P or BY8301-16P
@@ -151,18 +148,13 @@ SoftwareSerial MP3Serial(8, 4);
 
 
 // ARDUINO PIN ASSIGNMENTS...
-// Default Pin Assignments based off of the BASIC WIRING in NOTES - Original Pins below
-//     PIN_voice_LED     6  //Voice LED - 5mm White & 220 Ohm Resistor
-//     PIN_pulse_LED     5  //Logic LED - 3mm White & 220 Ohm Resistor
-//     PIN_sound         A2 //Speaker lead for sound & LED sync
-//     PIN_trigger       A3 //Connect to Switch
-//     PIN_sound_BUSY    3  //Connect to BUSY on MP3-FLASH-16P
+// Default Pin Assignments - BASIC WIRING in NOTES
 
-#define PIN_sound_BUSY    3
-#define PIN_pulse_LED     9  
-#define PIN_voice_LED     6  
-#define PIN_sound         A2
-#define PIN_trigger       A3
+#define PIN_sound_BUSY    3  //Connect to BUSY pin on sound module
+#define PIN_pulse_LED     9  //Logic LED - 3mm White & 220 Ohm Resistor
+#define PIN_voice_LED     6  //Voice LED - 5mm White & 220 Ohm Resistor
+#define PIN_sound         A2 //Speaker lead for sound & LED sync
+#define PIN_trigger       A3 //Connect to Switch
 
 
 // ADDITIONAL SOUND OPTIONS...
