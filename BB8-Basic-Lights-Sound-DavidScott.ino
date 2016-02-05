@@ -1,19 +1,21 @@
 /*
     ===================================================================================================
-    ==================  BB-8 Basic Lights and Sound using Arduino & MP3-FLASH-16P =====================
-    =========================================  v0.05  =================================================
+    ================================ BB-8 Basic Sound & Lights DOME ===================================
+    ======================================  Version 0.06  =============================================
     ===================================================================================================
 
-    Versions History
+    Version History
     0.01 - Original Sketch by DavidScott
     0.02 - r0n_dL added annotations & variable for PIN_sound_BUSY as suggested by DavidScott
-	  0.03 - r0n_dL reassigned pins to align with Padawan control system
-	       - Changed SoftwareSerial pins (RX/TX) 10/9 to 8/4
+    0.03 - r0n_dL reassigned pins to align with Padawan control system
+         - Changed SoftwareSerial pins (RX/TX) 10/9 to 8/4
     0.04 - Change pinMode for PIN_trigger to INPUT_PULLUP to resolve issue using with Pro Micro
     0.05 - Added support for the BY8301-16P and BY8001-16P sound modules
+    0.06 - Using an updated version of MP3FLASH16P (MP3Flash16Pv2) which now removes static serial
+           mappings out of the .cpp file
+         - Add support to select between using 3 different sound modules by changing 1 variable
 
-    r0n_dL IMPORTANT NOTE & RECOGNITON: This sketch was written by DavidScott. Only thing I did was added 
-      more annotations
+    r0n_dL IMPORTANT NOTE & RECOGNITON: This sketch was written by DavidScott. Thanks for a great base!
 
     // DavidScott's original comment below
     
@@ -28,8 +30,8 @@
 
     REQUIRED Libaries to make this sketch work:
     
-    MP3FLASH16P Library  
-    https://github.com/Critters/MP3FLASH16P
+    MP3Flash16Pv2 Library  
+    https://github.com/r0ndL/MP3Flash16Pv2
     
     BY8x0116P Library
     https://github.com/r0ndL/BY8x01
@@ -82,68 +84,70 @@
 FUTURE PINS:
  
 PS2 Controller
-	PS2ATT  10
-	PS2CMD  16
-	PS2DAT  14
-	Ps2CLK  15
+  PS2ATT  10
+  PS2CMD  16
+  PS2DAT  14
+  Ps2CLK  15
  
 For Body Signal
-	BODYRX RX1
+  BODYRX RX1
 
 RESERVED
-	8 (Analog) - RX (SoftwareSerial)
-	4 TX (SoftwareSerial)
+  8 (Analog) - RX (SoftwareSerial)
+  4 TX (SoftwareSerial)
  
 FREE
-	TX0
-	5 (Digital)
+  TX0
+  5 (Digital)
   7 
   Possibly For WTV020SD-16P
   WTV1BSY A0
   WTV1CLK A1
   WTV1DAT 2
 
-	
+  
  SoftwareSerial Limitations:
  The library has the following known limitations:
-	If using multiple software serial ports, only one can receive data at a time.
-	
-	Not all pins on the Mega and Mega 2560 support change interrupts, so only the following can be used for 
-	RX: 10, 11, 12, 13, 14, 15, 50, 51, 52, 53, A8 (62), A9 (63), A10 (64), A11 (65), A12 (66), A13 (67), 
-	A14 (68), A15 (69).
+  If using multiple software serial ports, only one can receive data at a time.
+  
+  Not all pins on the Mega and Mega 2560 support change interrupts, so only the following can be used for 
+  RX: 10, 11, 12, 13, 14, 15, 50, 51, 52, 53, A8 (62), A9 (63), A10 (64), A11 (65), A12 (66), A13 (67), 
+  A14 (68), A15 (69).
 
-	Not all pins on the Leonardo and Micro support change interrupts, so only the following can be used for
-	RX: 8, 9, 10, 11, 14 (MISO), 15 (SCK), 16 (MOSI).
+  Not all pins on the Leonardo and Micro support change interrupts, so only the following can be used for
+  RX: 8, 9, 10, 11, 14 (MISO), 15 (SCK), 16 (MOSI).
 */
 
 // SET AUDIO OPTIONS...
 
-// NOTE: 	This sketch currently supports 3 different sound modules (MP3-FLASH-16P, BY8001-16P, BY8301-16P)
-//			  BUT I'm having issues with the libraries conflicting with each other if I use the option to
-//			  define the audio and use if/else statements.  SOOOO until I get the library issue resolved just
-//			  comment out the library not required and the next proceeding line. 
+// NOTE:  This sketch currently supports 3 different sound modules (MP3-FLASH-16P, BY8001-16P, BY8301-16P)
+//        BUT I'm having issues with the libraries conflicting with each other if I use the option to
+//        define the audio and use if/else statements.  SOOOO until I get the library issue resolved just
+//        comment out the library not required and the next proceeding line. 
   
-//#define AUDIO1  1 // 1=MP3-FLASH-16P
+#define AUDIO1  1   // 1=MP3-FLASH-16P
                     // 2=BY8001-16P or BY8301-16P
 
                             
 // INCLUDE LIBS AND DECLARE VARIABLES...
 
 #include "SoftwareSerial.h"
+SoftwareSerial MP3Serial(8, 4);
 
-//#if (AUDIO1==2)
-  //settings for BY8001-16P or BY8301-16P module...
+#if (AUDIO1==2)
+  //settings for BY8001-16P or BY8301-16P module... 
+
+  #include "BY8x0116Pv2.h"
+  BY8x0116Pv2 myPlayer(MP3Serial); // Use SoftwareSerial as the serial port
   
-  //#include <BY8x0116P.h>
-  //BY8x0116P myPlayer;
-  
-//#else 
+#else 
   //settings for MP3-FLASH-16P...
   
-  #include "MP3FLASH16P.h"
-  MP3FLASH16P myPlayer;
+  #include "MP3Flash16Pv2.h"
+  MP3Flash16Pv2 myPlayer(MP3Serial); // Use SoftwareSerial as the serial port
   
-//#endif
+  
+#endif
 
 
 // ARDUINO PIN ASSIGNMENTS...
@@ -171,14 +175,15 @@ FREE
 
 void setup() 
 {
+    MP3Serial.begin(9600);
     myPlayer.init(PIN_sound_BUSY);      // Init the player with the MP3 BUSY pin connected to Arduino pin defined
     pinMode(PIN_voice_LED, OUTPUT);
     pinMode(PIN_pulse_LED, OUTPUT); 
     pinMode(PIN_sound, INPUT);
     pinMode(PIN_trigger, INPUT_PULLUP); // Changed INPUT to INPUT_PULLUP because of issues working with Pro Micro.  
-										                    // Change back to INPUT if required
+                                        // Change back to INPUT if required
     randomSeed(analogRead(0));
-    Serial.begin(9600);
+    //Serial.begin(9600);
 }
 
 int voiceBrightness;
