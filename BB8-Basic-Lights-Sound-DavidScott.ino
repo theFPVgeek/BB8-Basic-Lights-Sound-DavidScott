@@ -34,7 +34,7 @@
     https://github.com/r0ndL/MP3Flash16Pv2
     
     BY8x0116P Library
-    https://github.com/r0ndL/BY8x01
+    https://github.com/r0ndL/BY8x0116Pv2
 
     
     IMPORTANT: By default MP3FLASH16P &  BY8x0116P library assumes using Software Serial (RX/TX) ports 10/11.
