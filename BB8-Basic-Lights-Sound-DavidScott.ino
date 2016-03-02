@@ -1,7 +1,7 @@
 /*
     ===================================================================================================
     ==================================== BB-8 PADAWAN DOME ============================================
-    ======================================  Version 0.06  =============================================
+    ======================================  Version 0.07  =============================================
     ===================================================================================================
 
     Version History
@@ -14,6 +14,7 @@
     0.06 - Using an updated version of MP3FLASH16P (MP3Flash16Pv2) which now removes static serial
            mappings out of the .cpp file
          - Add support to select between using 3 different sound modules by changing 1 variable
+    0.06 - Changed hard coded serial port in library
 
     r0n_dL IMPORTANT NOTE & RECOGNITON: This sketch was written by DavidScott. Thanks for a great base!
 
@@ -36,9 +37,6 @@
     BY8x0116P Library
     https://github.com/r0ndL/BY8x0116Pv2
 
-    
-    IMPORTANT: By default MP3FLASH16P &  BY8x0116P library assumes using Software Serial (RX/TX) ports 10/11.
-                  Change this pin assignments if using different pins in the .cpp file.  I'm using 8/4.
 
     r0n_dL PARTS USED
     
