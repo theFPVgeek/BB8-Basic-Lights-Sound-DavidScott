@@ -14,7 +14,7 @@
     0.06 - Using an updated version of MP3FLASH16P (MP3Flash16Pv2) which now removes static serial
            mappings out of the .cpp file
          - Add support to select between using 3 different sound modules by changing 1 variable
-    0.06 - Changed hard coded serial port in library
+    0.07 - Changed hard coded serial port in library
 
     r0n_dL IMPORTANT NOTE & RECOGNITON: This sketch was written by DavidScott. Thanks for a great base!
 
@@ -78,31 +78,22 @@
  NOTE: 3mm Red LED and 3mm Blue LED wired in series with 56 ohm Resistor
  * MP3 TX to Pin 8 not required.  Do not use pin 8 for anything else
  
-
-FUTURE PINS:
- 
-PS2 Controller
-  PS2ATT  10
-  PS2CMD  16
-  PS2DAT  14
-  Ps2CLK  15
- 
-For Body Signal
-  BODYRX RX1
-
-RESERVED
+RESERVED DO NOT USE
   8 (Analog) - RX (SoftwareSerial)
-  4 TX (SoftwareSerial)
  
-FREE
-  TX0
-  5 (Digital)
+FREE PINS on Arduino
+  TX1
+  RX0
+  2
+  5
   7 
-  Possibly For WTV020SD-16P
-  WTV1BSY A0
-  WTV1CLK A1
-  WTV1DAT 2
-
+  10
+  16
+  14
+  15
+  A0
+  A1
+  
 */
 
 // SET AUDIO OPTIONS...
